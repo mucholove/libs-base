@@ -7,6 +7,29 @@
 @protocol NSURLSessionDelegate;
 @protocol NSURLSessionTaskDelegate;
 
+/*
+ * Disposition options for various delegate messages
+ */
+typedef NS_ENUM(NSInteger, NSURLSessionDelayedRequestDisposition) {
+    NSURLSessionDelayedRequestContinueLoading = 0,  /* Use the original request provided when the task was created; the request parameter is ignored. */
+    NSURLSessionDelayedRequestUseNewRequest   = 1,  /* Use the specified request, which may not be nil. */
+    NSURLSessionDelayedRequestCancel          = 2,  /* Cancel the task; the request parameter is ignored. */
+};
+
+typedef NS_ENUM(NSInteger, NSURLSessionAuthChallengeDisposition) {
+    NSURLSessionAuthChallengeUseCredential                 = 0,                                       /* Use the specified credential, which may be nil */
+    NSURLSessionAuthChallengePerformDefaultHandling        = 1,                              /* Default handling for the challenge - as if this delegate were not implemented; the credential parameter is ignored. */
+    NSURLSessionAuthChallengeCancelAuthenticationChallenge = 2,                       /* The entire request will be canceled; the credential parameter is ignored. */
+    NSURLSessionAuthChallengeRejectProtectionSpace         = 3,                               /* This challenge is rejected and the next authentication protection space should be tried; the credential parameter is ignored. */
+};
+
+typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
+    NSURLSessionResponseCancel         = 0,  /* Cancel the load, this is the same as -[task cancel] */
+    NSURLSessionResponseAllow          = 1,  /* Allow the load to continue */
+    NSURLSessionResponseBecomeDownload = 2,  /* Turn this request into a download */
+    NSURLSessionResponseBecomeStream   = 3,  /* Turn this task into a stream task */
+};
+
 @interface NSURLSession : NSObject
 @end
 

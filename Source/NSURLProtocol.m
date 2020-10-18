@@ -1392,7 +1392,7 @@ static NSURLProtocol	*placeholder = nil;
 	       */
 	      if (_isLoading == YES)
 	        {
-		  _isLoading = NO;
+              _isLoading = NO;
 	          [this->client URLProtocolDidFinishLoading: self];
 		}
 	    }
